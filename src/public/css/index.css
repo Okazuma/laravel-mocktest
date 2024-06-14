@@ -1,0 +1,76 @@
+.stamp-alert{
+    background: rgb(170, 230, 245);
+}
+alert alert-success,
+.alert alert-warning{
+    background: rgb(170, 230, 245);
+}
+
+.stamp__container {
+    margin: 0 auto;
+    padding: 30px 15px;
+    background: rgb(225, 225, 225);
+    height: 84vh;
+}
+
+.stamp__heading {
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.stamp__ttl{
+    font-size: 20px;
+}
+
+.form__group-content {
+    display: grid;
+    grid-template-rows: 45% 45%;
+    grid-template-columns: 1fr 1fr;
+    padding: 20px 100px 80px 100px;
+    gap: 10% 5%;
+    height:65vh;
+}
+
+.form__button--start-work{
+    grid-column: 1/2;
+    grid-row: 1/2;
+    width:100%;
+    height:100%;
+    border: none;
+    border-radius: 5px;
+            /* background: red; */
+}
+
+.form__button--end-work{
+    grid-column: 2/3;
+    grid-row: 1/2;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 5px;
+            /* background: blue; */
+}
+
+.form__button--start-break{
+    grid-column: 1/2;
+    grid-row: 2/3;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 5px;
+            /* background: yellow; */
+}
+
+.form__button--end-work{
+    grid-column: 2/3;
+    grid-row: 2/3;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 5px;
+            /* background: green; */
+}
+
+.button-stamp{
+    font-size: 20px;
+}
