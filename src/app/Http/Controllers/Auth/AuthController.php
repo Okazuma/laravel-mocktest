@@ -9,16 +9,11 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-// use App\Http\Requests\LoginRequest;
+use Illuminate\Auth\Events\Registered;
 
 class AuthController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth')->except(['register', 'showRegisterForm','showLoginForm','verify', 'sendEmailVerificationNotification']);
-    //     $this->middleware('signed')->only('verify');
-    //     $this->middleware('throttle:6,1')->only('sendEmailVerificationNotification');
-    // }
+    
 
     public function login(Request $request)
     {
@@ -28,10 +23,18 @@ class AuthController extends Controller
             // 認証成功時の処理
             return redirect()->intended('/');
         }
-
-        
+        return redirect()->back()->withErrors(['email' => 'ログイン情報が正しくありません。']);
     }
+
     
+
+
+
+
+
+    
+
+
     public function logout(Request $request)
     {
         Auth::logout();
@@ -61,41 +64,49 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
-        return redirect('/');
+
+        event(new Registered($user));
+
+        Auth::login($user);
+
+        return redirect()->route('register.success');
 
     }
 
-
-    //     // ユーザー登録後にメールを送信
-        // $user->sendEmailVerificationNotification();
-
-        // Auth::login($user);
-
-        // return redirect()->route('verification.notice');
-    // }
-
-    // public function show(Request $request)
+// メール認証後の処理
+    // public function verifyEmail(EmailVerificationRequest $request)
     // {
-    //     return view('auth.verify-email');
+    //     $request->fulfill();
+
+    //     Auth::login($request->user());
+
+    //     return redirect('/');
     // }
 
-    // public function verify(Request $request, $id, $hash)
-    // {
-    //     if (! $request->user() || $request->user()->getKey() != $id) {
-    //         return redirect('/login')->withErrors(['email' => 'Invalid verification link.']);
-    //     }
+    public function verifyEmail(EmailVerificationRequest $request)
+{
+    $user = $request->user();
 
-    //     if ($request->user()->markEmailAsVerified()) {
-    //         event(new Verified($request->user()));
-    //     }
+    // メールがすでに認証済みでないかを確認
+    if ($user->hasVerifiedEmail()) {
+        return redirect('/')->with('status', 'Your email is already verified.');
+    }
 
-    //     return redirect('/home')->with('verified', true);
-    // }
+    // メール認証を完了させる
+    if ($user->markEmailAsVerified()) {
+        event(new Verified($user));
+    }
 
-    // public function sendEmailVerificationNotification(Request $request)
-    // {
-    //     $request->user()->sendEmailVerificationNotification();
+    return redirect('/')->with('status', 'Your email has been verified.');
+}
 
-    //     return back()->with('message', 'Verification link sent!');
-    // }
+
+    public function resendVerificationEmail(Request $request)
+    {
+        $request->user()->sendEmailVerificationNotification();
+
+        return redirect('/email/verify')->with('resent', true);
+    }
+
+
 }

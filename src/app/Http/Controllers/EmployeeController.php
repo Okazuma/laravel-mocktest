@@ -9,11 +9,20 @@ use Carbon\Carbon;
 
 class EmployeeController extends Controller
 {
-    public function employees()
+    // ユーザー一覧ページの表示
+    public function employee()
     {
-        // $users = User::all();
-        // $attendances = Attendance::with('user')->paginate(5);
+        $users = User::paginate(2);
 
-        // return view('employee', compact('attendances', 'users'));
+        return view('employees.employee', compact('users'));
+    }
+
+
+    // ユーザーの詳細情報の表示
+    public function detail($id)
+    {
+        $user = User::findOrFail($id);
+        $attendances = $user->attendances()->orderBy('work_date', 'desc')->paginate(2);
+        return view('employees.detail', compact('user', 'attendances'));
     }
 }

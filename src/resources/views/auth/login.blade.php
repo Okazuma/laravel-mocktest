@@ -42,7 +42,7 @@
 
     <div class="login__footer">
         <span class=login__footer-text>アカウントをお持ちでない方はこちら</span><br>
-            <a class="login__button-register" href="/register">会員登録</a>
+            <a class="login__button-register" href="{{route('register')}}">会員登録</a>
     </div>
 
 </div>

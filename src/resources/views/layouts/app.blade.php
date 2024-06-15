@@ -27,7 +27,7 @@
                 <div class="header__logo">
                     <h1 class="header__ttl">Atte</h1>
                 </div>
-                @if (Auth::check())
+                @if (Auth::check() && Auth::user()->hasVerifiedEmail())
                 <nav class="header__nav">
                     <ul class="header__ul">
                         <li class="header__li">
@@ -37,6 +37,9 @@
                             <a class="header__link-button" href="/attendance">日付一覧</a>
                         </li>
 
+                        <li class="header__li">
+                            <a class="header__link-button" href="/employee">勤務者一覧</a>
+                        </li>
 
                         <li class="header__li">
                             <form class="header__button" action="/logout" method="post">

@@ -55,22 +55,54 @@ class StampController extends Controller
 
 // 勤務終了ボタンを押した時の処理ーーーーー
 
+    // public function endWork()
+    // {
+    //     $userId = auth()->id();
+
+    //     $attendance =
+    //     Attendance::where('user_id',$userId)->whereNull('clock_out')->latest()->first();
+
+    //     if($attendance){
+    //         $attendance->update(['clock_out'=>Carbon::now(),
+    //     ]);
+
+    //     Session::forget('work_started');
+
+    //         return redirect('/')->with('success_message','勤務を終了しました');
+    //     }
+    //     return redirect('/')->with('warning_message', '勤務開始されていません。');
+    // }
+
     public function endWork()
     {
         $userId = auth()->id();
 
-        $attendance =
-        Attendance::where('user_id',$userId)->whereNull('clock_out')->latest()->first();
+        $attendance = Attendance::where('user_id', $userId)
+                        ->whereNull('clock_out')
+                        ->latest()
+                        ->first();
 
-        if($attendance){
-            $attendance->update(['clock_out'=>Carbon::now(),
-        ]);
+        if ($attendance) {
+            // 勤務終了時に休憩が終了していないかを確認
+            $breakTime = Breaktime::where('attendance_id', $attendance->id)
+                ->whereNull('end_break')
+                ->latest()
+                ->first();
 
-        Session::forget('work_started');
+            if ($breakTime) {
+                return redirect('/')->with('warning_message', '休憩を終了してから勤務を終了してください');
+            }
 
-            return redirect('/')->with('success_message','勤務を終了しました');
+            // 勤務終了時刻を更新
+            $attendance->update(['clock_out' => Carbon::now()]);
+
+            // セッションから勤務開始フラグを削除
+            Session::forget('work_started');
+
+            return redirect('/')->with('success_message', '勤務を終了しました');
         }
-        return redirect('/')->with('warning_message', '勤務開始されていません。');
+
+        return redirect('/')->with('warning_message', '勤務開始されていません');
     }
 
 // ーーーーーーー
@@ -90,6 +122,16 @@ class StampController extends Controller
         if (!$attendance) {
             return redirect('/')->with('warning_message', '勤務は開始されていません');
         }
+
+        $breakTime = Breaktime::where('attendance_id', $attendance->id)
+                          ->whereNull('end_break')
+                          ->latest()
+                          ->first();
+
+    if ($breakTime) {
+        return redirect('/')->with('warning_message', '休憩は既に開始されています');
+    }
+    
         Breaktime::create([
             'attendance_id' => $attendance->id,
             'start_break' => Carbon::now(),

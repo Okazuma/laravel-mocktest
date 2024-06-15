@@ -60,7 +60,7 @@
 
     <div class="register__footer">
         <span class=register__footer-text>アカウントをお持ちの方はこちら</span><br>
-        <a class="register__button-login" href="/login">ログイン</a>
+        <a class="register__button-login" href="{{route('login')}}">ログイン</a>
     </div>
 
 </div>

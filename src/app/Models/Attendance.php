@@ -45,9 +45,10 @@ class Attendance extends Model
         return null;
     }
 
+
     // 休憩合計時間を時間、分、秒でフォーマットするアクセサ
     public function getFormattedTotalBreakAttribute()
-{
+    {
     if ($this->total_break !== null) {
         $hours = intdiv($this->total_break, 3600);
         $minutes = intdiv($this->total_break % 3600, 60);
@@ -55,16 +56,28 @@ class Attendance extends Model
         return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
     }
     return '00:00:00';
-}
-
-public function getFormattedTotalWorkTimeAttribute()
-{
-    if ($this->totalWorkTime !== null) {
-        $hours = intdiv($this->totalWorkTime, 3600);
-        $minutes = intdiv($this->totalWorkTime % 3600, 60);
-        $seconds = $this->totalWorkTime % 60;
-        return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
     }
-    return '00:00:00';
-}
+
+
+    // 勤務合計時間を時間、分、秒でフォーマットするアクセサ
+    public function getFormattedTotalWorkTimeAttribute()
+    {
+        if ($this->totalWorkTime !== null) {
+            $hours = intdiv($this->totalWorkTime, 3600);
+            $minutes = intdiv($this->totalWorkTime % 3600, 60);
+            $seconds = $this->totalWorkTime % 60;
+            return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
+        }
+        return '00:00:00';
+    }
+
+
+    // public function getFormattedWorkDateAttribute()
+    // {
+    //     if ($this->work_date) {
+    //         return Carbon::parse($this->work_date)->format('m/d');
+    //     }
+    //     return null;
+    // }
+
 }

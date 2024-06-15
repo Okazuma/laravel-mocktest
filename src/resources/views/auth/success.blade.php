@@ -1,16 +1,15 @@
 @extends('layouts.app')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Success') }}</div>
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/success.css') }}">
+@endsection
 
-                <div class="card-body">
-                    {{ __('Registration successful! Please check your email for the verification link.') }}
-                </div>
-            </div>
+@section('content')
+<div class="success__container">
+    <div class="success__inner">
+        <div class="back__button">
+                    <a class="back__button-login" href="{{route('login')}}">TOPへ戻る</a>
+                    
         </div>
     </div>
 </div>

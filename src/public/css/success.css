@@ -1,0 +1,27 @@
+.success__container {
+    margin: 0 auto;
+    padding: 30px 15px;
+    background: rgb(225, 225, 225);
+    height: 84vh;
+}
+
+.success__inner{
+    display:flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+.back__button{
+    width: 140px;
+    text-align: center;
+    border: 1px solid grey;
+    border-radius: 3px;
+    cursor: pointer;
+    background: #ffffff;
+}
+
+.back__button-login{
+    display: block;
+    text-decoration: none;
+    color: rgb(50, 50, 50);
+}
