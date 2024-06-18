@@ -14,7 +14,7 @@
 
         <table class="detail__group__content">
             <tr class="detail-table__row">
-                <th class="detail-table__heading">Date</th>
+                <th class="detail-table__heading">日付</th>
                 <th class="detail-table__heading">勤務開始</th>
                 <th class="detail-table__heading">勤務終了</th>
                 <th class="detail-table__heading">休憩時間</th>
@@ -22,13 +22,13 @@
             </tr>
 
             @foreach($attendances as $attendance)
-                <tr class="detail-table__row">
-                    <td class="detail-table__item">{{ \Carbon\Carbon::parse($attendance->work_date)->format('m/d') }}</td>
-                    <td class="detail-table__item">{{ \Carbon\Carbon::parse($attendance->clock_in)->format('H:i:s') }}</td>
-                    <td class="detail-table__item">{{ \Carbon\Carbon::parse($attendance->clock_out)->format('H:i:s') }}</td>
-                    <td class="detail-table__item">{{ $attendance->formatted_total_break }}</td>
-                    <td class="detail-table__item">{{ $attendance->formatted_total_work_time }}</td>
-                </tr>
+            <tr class="detail-table__row">
+                <td class="detail-table__item">{{ \Carbon\Carbon::parse($attendance->work_date)->format('m/d') }}</td>
+                <td class="detail-table__item">{{ \Carbon\Carbon::parse($attendance->clock_in)->format('H:i:s') }}</td>
+                <td class="detail-table__item">{{ \Carbon\Carbon::parse($attendance->clock_out)->format('H:i:s') }}</td>
+                <td class="detail-table__item">{{ $attendance->formatted_total_break }}</td>
+                <td class="detail-table__item">{{ $attendance->formatted_total_work_time }}</td>
+            </tr>
             @endforeach
         </table>
 

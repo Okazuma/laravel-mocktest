@@ -7,6 +7,7 @@
 @section('content')
 
 <div class="register__container">
+
     <div class="register__heading">
         <h2 class="register__ttl">会員登録</h2>
     </div>
@@ -14,13 +15,14 @@
     <form class="form" action="/register" method="post">
         @csrf
         <div class="form__group">
-
             <div class="form__group-content">
                 <div class="form__input--text">
                     <input type="text" name="name" placeholder="名前" autocomplete="name" value="{{ old('name') }}" />
                 </div>
                 <div class="form__error">
-                <!-- バリデーション -->
+                    @error('name')
+                    {{ $message }}
+                    @enderror
                 </div>
             </div>
 
@@ -29,7 +31,9 @@
                     <input type="email" name="email" placeholder="メールアドレス" autocomplete="email" value="{{ old('email') }}" >
                 </div>
                 <div class="form__error">
-                <!-- バリデーション -->
+                    @error('email')
+                    {{ $message }}
+                    @enderror
                 </div>
             </div>
 
@@ -38,7 +42,9 @@
                     <input type="password" name="password" placeholder="パスワード" value="{{ old('password' )}}">
                 </div>
                 <div class="form__error">
-                <!-- バリデーション -->
+                    @error('password')
+                    {{ $message }}
+                    @enderror
                 </div>
             </div>
 
@@ -47,7 +53,9 @@
                     <input type="password" name="password_confirmation"  placeholder="確認用パスワード" />
                 </div>
                 <div class="form__error">
-                <!-- バリデーション -->
+                    @error('password_confirmation')
+                    {{ $message }}
+                    @enderror
                 </div>
             </div>
 

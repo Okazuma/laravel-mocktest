@@ -40,6 +40,11 @@
 
 .form__error{
     color: red;
+    margin: 0;
+    padding-left: 8px;
+    text-align:left;
+    margin: auto 0;
+    font-size:14px;
 }
 
 .form__button{

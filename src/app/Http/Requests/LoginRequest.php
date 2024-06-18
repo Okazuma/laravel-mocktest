@@ -13,7 +13,7 @@ class LoginRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,8 +25,20 @@ class LoginRequest extends FormRequest
     {
         return [
             //
-            'email' => 'required|email',
-            'password' => 'required',
+            'email' => ['required','string','email'],
+            'password' => ['required','string','min:8'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'email.required' => 'メールアドレスを入力してください',
+            'email.string' => 'メールアドレスを文字列で入力してください',
+            'email.email' => 'メールアドレスを「ユーザー名@ドメイン」形式で入力してください',
+            'password.required' => 'パスワードを入力してください',
+            'password.string' => 'パスワードを文字列で入力してください',
+            'password.min' => 'パスワードは8桁以上で入力してください',
         ];
     }
 }

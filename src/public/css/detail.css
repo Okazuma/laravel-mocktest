@@ -1,7 +1,3 @@
-.alert alert-danger {
-    background: red;
-}
-
 .detail__container {
     margin: 0 auto;
     padding: 30px 15px;
@@ -60,12 +56,12 @@
     padding: 16px 48px 16px 24px;
 }
 
-
 .footer__paginate .pagination {
     display: flex;
     justify-content: center;
     list-style: none;
     padding: 0;
+    margin-top: 40px;
 }
 
 .footer__paginate .pagination li {

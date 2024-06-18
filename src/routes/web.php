@@ -21,23 +21,30 @@ use Illuminate\Support\Facades\URL;
 */
 
 // 会員登録認証ルート
+
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout']);
+
 // ーーーーーーーーーーーーーーー
 
 
 // 会員登録後のsuccess表示のルート
-Route::get('/register/success', function () {
-    return view('auth.success');
-})->name('register.success');
+// Route::get('/register/success', function () {
+//     return view('auth.success');
+// })->name('register.success');
+
+Route::get('/email.verify', function () {
+    return view('auth.verify-email');
+})->name('email.verify');
 
 // ーーーーーーーーーーーーーーー
 
 
 // 勤怠打刻画面と日別一覧のビューのルート
+
 Route::middleware('auth')->group(function() {
     Route::get('/attendance', [AttendanceController::class, 'index']);
     Route::get('/', [StampController::class, 'index']);
@@ -65,6 +72,7 @@ Route::get('/employees/{id}', [EmployeeController::class, 'detail'])->name('empl
 
 
 // メール認証関連のルート
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/email/verify', function () {
         return view('auth.verify-email');

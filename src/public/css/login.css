@@ -36,11 +36,15 @@
     padding-left: 8px;
     border-width: 1px;
     border-radius: 5px;
-    /* padding-top:4px; */
 }
 
-.form__error{
+.form__error {
     color: red;
+    margin: 0;
+    padding-left: 8px;
+    text-align: left;
+    margin: auto 0;
+    font-size: 14px;
 }
 
 .form__button {
@@ -49,7 +53,6 @@
 
 .form__button-submit {
     width: 100%;
-    /* display: block; */
     color: white;
     background: rgb(65, 65, 240);
     height: 48px;
