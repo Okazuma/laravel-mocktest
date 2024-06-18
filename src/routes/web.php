@@ -7,6 +7,8 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\EmployeeController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
+use Illuminate\Support\Facades\URL;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,8 +57,8 @@ Route::middleware('auth')->group(function() {
 
 // 勤務者一覧ビューのルート
 
-
-
+Route::get('/employee',[EmployeeController::class,'employee'])->name('employees.employee');
+Route::get('/employees/{id}', [EmployeeController::class, 'detail'])->name('employees.detail');
 
 // ーーーーーーーーーーーーーーー
 
@@ -79,6 +81,3 @@ Route::middleware(['auth'])->group(function () {
 // ーーーーーーーーーーーーーーー
 
 
-
-Route::get('/employee',[EmployeeController::class,'employee'])->name('employees.employee');
-Route::get('/employees/{id}', [EmployeeController::class, 'detail'])->name('employees.detail');

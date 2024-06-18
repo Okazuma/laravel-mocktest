@@ -15,7 +15,7 @@ class Attendance extends Model
         'clock_in',
         'clock_out',
         'work_date',
-        'total_break'
+        'total_break' // 休憩時間の合計（秒単位で保存されることを想定）
     ];
 
     protected $dates = ['clock_in', 'clock_out'];
@@ -30,7 +30,6 @@ class Attendance extends Model
         return $this->hasMany(Breaktime::class);
     }
 
-
     // 勤務合計時間を計算するアクセサ
     public function getTotalWorkTimeAttribute()
     {
@@ -40,44 +39,46 @@ class Attendance extends Model
             $end = $this->clock_out;
             $workDuration = $end->diffInSeconds($start);
 
-            return $workDuration - ($this->total_break * 60);
+            // getTotalBreakTimeInSecondsAttribute() メソッドで計算した休憩時間を取得
+            $breakTimeInSeconds = $this->getTotalBreakTimeInSecondsAttribute();
+
+            return $workDuration - $breakTimeInSeconds;
         }
         return null;
     }
 
+    // 休憩合計時間を計算するアクセサ
+    public function getTotalBreakTimeInSecondsAttribute()
+    {
+        return $this->total_break;
+    }
 
     // 休憩合計時間を時間、分、秒でフォーマットするアクセサ
     public function getFormattedTotalBreakAttribute()
     {
-    if ($this->total_break !== null) {
-        $hours = intdiv($this->total_break, 3600);
-        $minutes = intdiv($this->total_break % 3600, 60);
-        $seconds = $this->total_break % 60;
-        return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
-    }
-    return '00:00:00';
-    }
+        $totalBreakInSeconds = $this->getTotalBreakTimeInSecondsAttribute();
 
-
-    // 勤務合計時間を時間、分、秒でフォーマットするアクセサ
-    public function getFormattedTotalWorkTimeAttribute()
-    {
-        if ($this->totalWorkTime !== null) {
-            $hours = intdiv($this->totalWorkTime, 3600);
-            $minutes = intdiv($this->totalWorkTime % 3600, 60);
-            $seconds = $this->totalWorkTime % 60;
+        if ($totalBreakInSeconds !== null) {
+            $hours = intdiv($totalBreakInSeconds, 3600);
+            $minutes = intdiv($totalBreakInSeconds % 3600, 60);
+            $seconds = $totalBreakInSeconds % 60;
             return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
         }
         return '00:00:00';
     }
 
+    // 勤務合計時間を時間、分、秒でフォーマットするアクセサ
+    public function getFormattedTotalWorkTimeAttribute()
+    {
+        $totalWorkTimeInSeconds = $this->getTotalWorkTimeAttribute();
 
-    // public function getFormattedWorkDateAttribute()
-    // {
-    //     if ($this->work_date) {
-    //         return Carbon::parse($this->work_date)->format('m/d');
-    //     }
-    //     return null;
-    // }
+        if ($totalWorkTimeInSeconds !== null) {
+            $hours = intdiv($totalWorkTimeInSeconds, 3600);
+            $minutes = intdiv($totalWorkTimeInSeconds % 3600, 60);
+            $seconds = $totalWorkTimeInSeconds % 60;
+            return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
+        }
+        return '00:00:00';
+    }
 
 }

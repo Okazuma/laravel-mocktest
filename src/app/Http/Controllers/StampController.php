@@ -55,24 +55,6 @@ class StampController extends Controller
 
 // 勤務終了ボタンを押した時の処理ーーーーー
 
-    // public function endWork()
-    // {
-    //     $userId = auth()->id();
-
-    //     $attendance =
-    //     Attendance::where('user_id',$userId)->whereNull('clock_out')->latest()->first();
-
-    //     if($attendance){
-    //         $attendance->update(['clock_out'=>Carbon::now(),
-    //     ]);
-
-    //     Session::forget('work_started');
-
-    //         return redirect('/')->with('success_message','勤務を終了しました');
-    //     }
-    //     return redirect('/')->with('warning_message', '勤務開始されていません。');
-    // }
-
     public function endWork()
     {
         $userId = auth()->id();
@@ -119,19 +101,19 @@ class StampController extends Controller
         $attendance =
         Attendance::where('user_id',$userId)->whereNull('clock_out')->latest()->first();
 
-        if (!$attendance) {
-            return redirect('/')->with('warning_message', '勤務は開始されていません');
-        }
+            if (!$attendance) {
+                return redirect('/')->with('warning_message', '勤務は開始されていません');
+            }
 
         $breakTime = Breaktime::where('attendance_id', $attendance->id)
-                          ->whereNull('end_break')
-                          ->latest()
-                          ->first();
+            ->whereNull('end_break')
+            ->latest()
+            ->first();
 
-    if ($breakTime) {
-        return redirect('/')->with('warning_message', '休憩は既に開始されています');
-    }
-    
+            if ($breakTime) {
+                return redirect('/')->with('warning_message', '休憩は既に開始されています');
+            }
+
         Breaktime::create([
             'attendance_id' => $attendance->id,
             'start_break' => Carbon::now(),
@@ -151,9 +133,9 @@ class StampController extends Controller
         $userId = auth()->id();
 
         $attendance = Attendance::where('user_id', $userId)
-                        ->whereNull('clock_out')
-                        ->latest()
-                        ->first();
+            ->whereNull('clock_out')
+            ->latest()
+            ->first();
 
         if ($attendance) {
             $breakTime = BreakTime::where('attendance_id', $attendance->id)
@@ -184,6 +166,5 @@ class StampController extends Controller
     }
 
 // ーーーーーーー
-
 
 }

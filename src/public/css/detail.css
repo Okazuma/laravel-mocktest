@@ -21,7 +21,6 @@
 .detail__ttl {
     font-size: 20px;
     margin: 0px 40px 0px 40px;
-
 }
 
 .detail__button {
@@ -45,7 +44,6 @@
 .detail__group__content {
     margin: 0 auto;
     padding: 4px 40px;
-    /* background: white; */
     width: 84vw;
 }
 
@@ -59,7 +57,6 @@
 }
 
 .detail-table__item {
-    /* text-align: center; */
     padding: 16px 48px 16px 24px;
 }
 

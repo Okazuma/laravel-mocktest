@@ -19,7 +19,6 @@
         <tr class="employee-table__row">
             <th class="employee-table__heading">名前</th>
             <th class="employee-table__heading">勤務情報</th>
-            
         </tr>
 
         @foreach($users as $user)
@@ -28,7 +27,7 @@
             <td class="employee-table__item">
                 <div class="employee__button">
                     <a class="employee__button-detail" href="{{ route('employees.detail', $user->id) }}">詳細</a>
-                </div> 
+                </div>
             </td>
         </tr>
         @endforeach

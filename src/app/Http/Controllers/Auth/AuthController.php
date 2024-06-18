@@ -13,7 +13,6 @@ use Illuminate\Auth\Events\Registered;
 
 class AuthController extends Controller
 {
-    
 
     public function login(Request $request)
     {
@@ -26,14 +25,6 @@ class AuthController extends Controller
         return redirect()->back()->withErrors(['email' => 'ログイン情報が正しくありません。']);
     }
 
-    
-
-
-
-
-
-    
-
 
     public function logout(Request $request)
     {
@@ -43,7 +34,7 @@ class AuthController extends Controller
         session()->flush();
         return redirect('/login');
     }
-
+// 登録フォームの表示
     public function showRegisterForm()
     {
         return view('auth.register');
@@ -73,32 +64,23 @@ class AuthController extends Controller
 
     }
 
-// メール認証後の処理
-    // public function verifyEmail(EmailVerificationRequest $request)
-    // {
-    //     $request->fulfill();
-
-    //     Auth::login($request->user());
-
-    //     return redirect('/');
-    // }
 
     public function verifyEmail(EmailVerificationRequest $request)
-{
-    $user = $request->user();
+    {
+        $user = $request->user();
 
-    // メールがすでに認証済みでないかを確認
-    if ($user->hasVerifiedEmail()) {
-        return redirect('/')->with('status', 'Your email is already verified.');
+        // メールがすでに認証済みでないかを確認
+        if ($user->hasVerifiedEmail()) {
+            return redirect('/')->with('status', 'Your email is already verified.');
+        }
+
+        // メール認証を完了させる
+        if ($user->markEmailAsVerified()) {
+            event(new Verified($user));
+        }
+
+        return redirect('/')->with('status', 'Your email has been verified.');
     }
-
-    // メール認証を完了させる
-    if ($user->markEmailAsVerified()) {
-        event(new Verified($user));
-    }
-
-    return redirect('/')->with('status', 'Your email has been verified.');
-}
 
 
     public function resendVerificationEmail(Request $request)
