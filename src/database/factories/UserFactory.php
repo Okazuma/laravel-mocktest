@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-// use Faker\Factory as FakerFactory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\Attendance;
@@ -20,8 +19,6 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        // $faker = FakerFactory::create('ja_JP');
-
         return [
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,

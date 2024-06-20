@@ -53,22 +53,5 @@ class FortifyServiceProvider extends ServiceProvider
             return view('auth.verify-email');
         });
 
-
-    //     Fortify::afterCreating(function ($user) {
-    //     // 登録後にリダイレクトさせるためのコード
-    //     return redirect()->route('login')->with('status', 'Verification email sent.');
-    // });
-
-    // Fortify::authenticateUsing(function (LoginRequest $request) {
-    //         // バリデーションを通過した場合の処理
-    //         if (Auth::attempt($request->only('email', 'password'))) {
-    //             return redirect()->intended('/');
-    //         }
-
-    //         // バリデーションに失敗した場合の処理
-    //         return back()->withErrors(['email' => '認証に失敗しました。']);
-    //     });
-
-
     }
 }

@@ -1,17 +1,10 @@
 /* 通常のビュー */
 .pagination .page-item .page-link {
     border: 1px solid #ddd;
-    /* 枠線のスタイル */
-    /* border-radius: 4px; */
-    /* 角の丸み */
     padding: 5px 10px;
-    /* 内側の余白 */
     margin: 0 ;
-    /* 各リンク間の余白 */
     text-decoration: none;
-    /* 下線を消す */
     color: #007bff;
-    /* テキストの色 */
     background-color: #ffffff;
     display: flex;
     justify-content: center;
@@ -20,28 +13,20 @@
 }
 
 
-/* 現在のページを表すビュー */
 .pagination .page-item.active .page-link {
     background-color: #007bff;
-    /* 背景色 */
     color: white;
-    /* テキストの色 */
     border-color: #007bff;
-    /* 枠線の色 */
     display: flex;
-        justify-content: center;
-        align-items: center;
+    justify-content: center;
+    align-items: center;
 }
 
-/* 無効なリンク */
 .pagination .page-item.disabled .page-link {
     color: #6c757d;
-    /* 無効状態のテキスト色 */
     background-color: #fff;
-    /* 背景色 */
     border-color: #ddd;
-    /* 枠線の色 */
     display: flex;
-        justify-content: center;
-        align-items: center;
+    justify-content: center;
+    align-items: center;
 }

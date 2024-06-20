@@ -33,8 +33,8 @@
         </table>
 
         <div class="footer__paginate">
-        {{ $attendances->links('vendor.pagination.bootstrap-4') }}
+            {{ $attendances->links('vendor.pagination.bootstrap-4') }}
         </div>
-
     </div>
+
 @endsection

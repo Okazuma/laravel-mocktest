@@ -35,7 +35,8 @@ class LoginRequest extends FormRequest
         return [
             'email.required' => 'メールアドレスを入力してください',
             'email.string' => 'メールアドレスを文字列で入力してください',
-            'email.email' => 'メールアドレスを「ユーザー名@ドメイン」形式で入力してください',
+            'email.email' => 'メール形式で入力してください',
+
             'password.required' => 'パスワードを入力してください',
             'password.string' => 'パスワードを文字列で入力してください',
             'password.min' => 'パスワードは8桁以上で入力してください',

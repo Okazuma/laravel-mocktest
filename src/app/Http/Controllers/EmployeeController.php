@@ -9,7 +9,9 @@ use Carbon\Carbon;
 
 class EmployeeController extends Controller
 {
-    // ユーザー一覧ページの表示
+
+// ユーザー一覧ページの表示
+
     public function employee()
     {
         $users = User::paginate(5);
@@ -17,7 +19,12 @@ class EmployeeController extends Controller
         return view('employees.employee', compact('users'));
     }
 
+// ーーーーーーーーーー
+
+
+
     // ユーザーの詳細情報の表示
+
     public function detail($id)
     {
         // 勤務者を取得
@@ -31,7 +38,9 @@ class EmployeeController extends Controller
             $attendance->formatted_total_break = $attendance->getFormattedTotalBreakAttribute();
         }
 
-        return view('employees.detail', compact('user', 'attendances'));
+        return view('/employees.detail', compact('user', 'attendances'));
     }
+
+// ーーーーーーーーーー
 
 }

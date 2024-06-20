@@ -8,7 +8,8 @@ use Carbon\Carbon;
 
 class AttendanceController extends Controller
 {
-    //
+// 日別一覧ビューの表示
+
     public function index(Request $request)
     {
         // リクエストから日付を取得する。もしリクエストに日付が含まれていない場合は、本日の日付を使用する
@@ -19,6 +20,8 @@ class AttendanceController extends Controller
 
         return view('attendance', compact('attendances', 'date'));
     }
+
+// ーーーーーーーーーー
 
 
 }

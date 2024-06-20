@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Attendance;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Carbon\Carbon;
 
 
 class AttendanceFactory extends Factory
@@ -15,28 +16,40 @@ class AttendanceFactory extends Factory
 
     public function definition()
     {
+        // 現在から過去1ヶ月以内のランダムな日付を取得
+        $randomDate = $this->faker->dateTimeBetween('-1 month', 'now');
 
-        // 勤務開始時間を現在から過去1ヶ月の期間内の午前9時に固定する
-        $clockIn = $this->faker->dateTimeBetween('-1 month', 'now')->setTime(9, 0, 0);
+        // 8時45分から9時の間のランダムな分を生成
+        $randomMinutes = $this->faker->numberBetween(0, 14); // 0から14のランダムな数値
 
-        // 例えば、勤務終了時間を8時間後から12時間後のランダムな時刻で設定する場合（15分単位）
-        $workMinutes = $this->faker->numberBetween(8 * 60, 12 * 60); // 分単位で計算
-        $clockOut = clone $clockIn;
-        $clockOut->modify("+$workMinutes minutes");
+        // 8時45分にランダムな分を加えて、勤務開始時間を設定
+        $clockIn = Carbon::instance($randomDate)->setTime(8, 45, 0)->addMinutes($randomMinutes);
 
-        // 休憩時間を60分から120分の間でランダムに設定（15分単位）
+        // 勤務終了時間を9時間30分から11時間後のランダムな時刻で設定する
+        $workHours = $this->faker->numberBetween(9, 10); // 9から10時間
+        $workMinutes = 0;
+
+        // 9時間30分から11時間になるように調整
+        if ($workHours === 9) {
+            $workMinutes = $this->faker->numberBetween(30, 59);
+        } else {
+            $workMinutes = $this->faker->numberBetween(0, 59);
+        }
+        $workSeconds = $this->faker->numberBetween(0, 59);
+
+        $clockOut = Carbon::parse($clockIn)->addHours($workHours)->addMinutes($workMinutes)->addSeconds($workSeconds);
+
+        // 休憩時間を60分から120分の間で設定し、秒単位で計算
         $breakMinutes = $this->faker->numberBetween(60, 120);
-
-        // 休憩時間を時間単位で保存
-        $totalBreakHours = $breakMinutes / 60;
+        $breakSeconds = $this->faker->numberBetween(0, 59);
+        $totalBreakSeconds = ($breakMinutes * 60) + $breakSeconds;
 
         // 勤務記録を作成
         return [
-            // 'user_id' => $user->id,
             'clock_in' => $clockIn,
             'clock_out' => $clockOut,
             'work_date' => $clockIn->format('Y-m-d'),
-            'total_break' => $breakMinutes, // 休憩時間を分単位で保存
+            'total_break' => $totalBreakSeconds,
         ];
     }
 

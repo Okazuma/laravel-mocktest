@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         // ユーザーを10人作成
         User::factory(10)->create()->each(function ($user) {
             // 各ユーザーに対して10個の勤怠記録を作成
-            Attendance::factory(10)->create(['user_id' => $user->id])->each(function ($attendance) {
+            Attendance::factory(20)->create(['user_id' => $user->id])->each(function ($attendance) {
                 // 各勤怠記録に対して2個の休憩記録を作成
                 $attendance->breaktimes()->saveMany(Breaktime::factory(2)->make());
             });

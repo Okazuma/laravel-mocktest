@@ -1,9 +1,8 @@
-.stamp-alert{
+.alert-success,
+.alert-warning,
+.alert-danger{
     background: rgb(170, 230, 245);
-}
-alert alert-success,
-.alert alert-warning{
-    background: rgb(170, 230, 245);
+    text-align: center;
 }
 
 .stamp__container {
@@ -38,7 +37,6 @@ alert alert-success,
     height:100%;
     border: none;
     border-radius: 5px;
-            /* background: red; */
 }
 
 .form__button--end-work{
@@ -48,7 +46,6 @@ alert alert-success,
     height: 100%;
     border: none;
     border-radius: 5px;
-            /* background: blue; */
 }
 
 .form__button--start-break{
@@ -58,7 +55,6 @@ alert alert-success,
     height: 100%;
     border: none;
     border-radius: 5px;
-            /* background: yellow; */
 }
 
 .form__button--end-work{
@@ -68,7 +64,6 @@ alert alert-success,
     height: 100%;
     border: none;
     border-radius: 5px;
-            /* background: green; */
 }
 
 .button-stamp{

@@ -11,7 +11,6 @@
     @yield('css')
     <style>
     svg.w-5.h-5 {
-        /*paginateメソッドの矢印の大きさ調整のために追加*/
         width: 30px;
         height: 30px;
     }
@@ -38,7 +37,7 @@
                         </li>
 
                         <li class="header__li">
-                            <a class="header__link-button" href="/employee">勤務者一覧</a>
+                            <a class="header__link-button" href="{{route('employees.employee')}}">勤務者一覧</a>
                         </li>
 
                         <li class="header__li">

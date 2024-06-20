@@ -15,7 +15,7 @@ class Attendance extends Model
         'clock_in',
         'clock_out',
         'work_date',
-        'total_break' // 休憩時間の合計（秒単位で保存されることを想定）
+        'total_break'
     ];
 
     protected $dates = ['clock_in', 'clock_out'];
@@ -30,7 +30,9 @@ class Attendance extends Model
         return $this->hasMany(Breaktime::class);
     }
 
+
     // 勤務合計時間を計算するアクセサ
+
     public function getTotalWorkTimeAttribute()
     {
         if ($this->clock_in && $this->clock_out)
@@ -47,13 +49,23 @@ class Attendance extends Model
         return null;
     }
 
+    // ーーーーーーーーーー
+
+
+
     // 休憩合計時間を計算するアクセサ
+
     public function getTotalBreakTimeInSecondsAttribute()
     {
         return $this->total_break;
     }
 
+    // ーーーーーーーーーー
+
+
+
     // 休憩合計時間を時間、分、秒でフォーマットするアクセサ
+
     public function getFormattedTotalBreakAttribute()
     {
         $totalBreakInSeconds = $this->getTotalBreakTimeInSecondsAttribute();
@@ -67,7 +79,12 @@ class Attendance extends Model
         return '00:00:00';
     }
 
+    // ーーーーーーーーーー
+
+
+
     // 勤務合計時間を時間、分、秒でフォーマットするアクセサ
+
     public function getFormattedTotalWorkTimeAttribute()
     {
         $totalWorkTimeInSeconds = $this->getTotalWorkTimeAttribute();
@@ -80,5 +97,7 @@ class Attendance extends Model
         }
         return '00:00:00';
     }
+
+    // ーーーーーーーーーー
 
 }

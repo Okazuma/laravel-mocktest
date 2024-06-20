@@ -13,14 +13,14 @@ use Illuminate\Support\Facades\Session;
 
 class StampController extends Controller
 {
-// ビューの表示ーーーーー
+// ビューの表示
 
     public function index()
     {
         return view('index');
     }
 
-// ーーーーーーー
+// ーーーーーーーーーー
 
 
 
@@ -48,12 +48,12 @@ class StampController extends Controller
         return redirect('/')->with('success_message', '勤務を開始しました');
     }
 
-// ーーーーーーー
+// ーーーーーーーーーー
 
 
 
 
-// 勤務終了ボタンを押した時の処理ーーーーー
+// 勤務終了ボタンを押した時の処理
 
     public function endWork()
     {
@@ -67,9 +67,9 @@ class StampController extends Controller
         if ($attendance) {
             // 勤務終了時に休憩が終了していないかを確認
             $breakTime = Breaktime::where('attendance_id', $attendance->id)
-                ->whereNull('end_break')
-                ->latest()
-                ->first();
+                        ->whereNull('end_break')
+                        ->latest()
+                        ->first();
 
             if ($breakTime) {
                 return redirect('/')->with('warning_message', '休憩を終了してから勤務を終了してください');
@@ -77,7 +77,6 @@ class StampController extends Controller
 
             // 勤務終了時刻を更新
             $attendance->update(['clock_out' => Carbon::now()]);
-
             // セッションから勤務開始フラグを削除
             Session::forget('work_started');
 
@@ -87,28 +86,28 @@ class StampController extends Controller
         return redirect('/')->with('warning_message', '勤務開始されていません');
     }
 
-// ーーーーーーー
+// ーーーーーーーーーー
 
 
 
 
-// 休憩開始ボタンを押した時の処理ーーーーー
+// 休憩開始ボタンを押した時の処理
 
     public function startBreak()
     {
         $userId = auth()->id();
 
         $attendance =
-        Attendance::where('user_id',$userId)->whereNull('clock_out')->latest()->first();
+            Attendance::where('user_id',$userId)->whereNull('clock_out')->latest()->first();
 
-            if (!$attendance) {
-                return redirect('/')->with('warning_message', '勤務は開始されていません');
-            }
+                if (!$attendance) {
+                    return redirect('/')->with('warning_message', '勤務は開始されていません');
+                }
 
         $breakTime = Breaktime::where('attendance_id', $attendance->id)
-            ->whereNull('end_break')
-            ->latest()
-            ->first();
+                    ->whereNull('end_break')
+                    ->latest()
+                    ->first();
 
             if ($breakTime) {
                 return redirect('/')->with('warning_message', '休憩は既に開始されています');
@@ -121,12 +120,11 @@ class StampController extends Controller
             return redirect('/')->with('success_message','休憩を開始しました');
     }
 
-// ーーーーーーー
+// ーーーーーーーーーー
 
 
 
-
-// 休憩終了ボタンを押した時の処理ーーーーー
+// 休憩終了ボタンを押した時の処理
 
     public function endBreak()
     {
@@ -144,27 +142,25 @@ class StampController extends Controller
                 ->first();
 
             if ($breakTime) {
-                // 休憩時間を計算
+                // 休憩時間を秒単位で計算
                 $startBreak = Carbon::parse($breakTime->start_break);
                 $endBreak = Carbon::now();
-                $breakDuration = $endBreak->diffInMinutes($startBreak);
+                $breakDurationInSeconds = $endBreak->diffInSeconds($startBreak);
 
                 // 休憩終了時間を更新
                 $breakTime->update(['end_break' => $endBreak]);
 
-                // 勤怠記録に休憩時間を加算
-                $attendance->total_break += $breakDuration;
+                // 勤怠記録に休憩時間を秒単位で加算
+                $attendance->total_break += $breakDurationInSeconds;
                 $attendance->save();
 
                 return redirect('/')->with('success_message', '休憩を終了しました');
             }
-
             return redirect('/')->with('warning_message', '休憩が開始されていません');
         }
-
         return redirect('/')->with('error_message', '勤務が開始されていません');
     }
 
-// ーーーーーーー
+// ーーーーーーーーーー
 
 }

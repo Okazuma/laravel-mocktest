@@ -6,7 +6,6 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\EmployeeController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
-
 use Illuminate\Support\Facades\URL;
 
 /*
@@ -28,19 +27,27 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout']);
 
-// ーーーーーーーーーーーーーーー
+// ーーーーーーーーーー
 
 
-// 会員登録後のsuccess表示のルート
-// Route::get('/register/success', function () {
-//     return view('auth.success');
-// })->name('register.success');
 
+// メール認証関連のルート
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])
+        ->middleware(['signed'])
+        ->name('verification.verify');
+
+    Route::post('/email/resend', [AuthController::class, 'resendVerificationEmail'])
+        ->middleware('throttle:6,1')
+        ->name('verification.resend');
+});
 Route::get('/email.verify', function () {
     return view('auth.verify-email');
 })->name('email.verify');
 
-// ーーーーーーーーーーーーーーー
+// ーーーーーーーーーー
+
 
 
 // 勤怠打刻画面と日別一覧のビューのルート
@@ -49,7 +56,7 @@ Route::middleware('auth')->group(function() {
     Route::get('/attendance', [AttendanceController::class, 'index']);
     Route::get('/', [StampController::class, 'index']);
 });
-// ーーーーーーーーーーーーーーー
+// ーーーーーーーーーー
 
 
 // 勤務時間と休憩時間の打刻ページのルート
@@ -59,33 +66,18 @@ Route::middleware('auth')->group(function() {
     Route::post('/start-break', [StampController::class, 'startBreak'])->name('start.break');
     Route::post('/end-break', [StampController::class, 'endBreak'])->name('end.break');
 });
-// ーーーーーーーーーーーーーーー
+// ーーーーーーーーーー
+
 
 
 // 勤務者一覧ビューのルート
 
-Route::get('/employee',[EmployeeController::class,'employee'])->name('employees.employee');
-Route::get('/employees/{id}', [EmployeeController::class, 'detail'])->name('employees.detail');
+Route::get('/employees.employee',[EmployeeController::class,'employee'])->name('employees.employee');
+Route::get('/employees.detail/{id}', [EmployeeController::class, 'detail'])->name('employees.detail');
 
-// ーーーーーーーーーーーーーーー
+// ーーーーーーーーーー
 
 
 
-// メール認証関連のルート
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/email/verify', function () {
-        return view('auth.verify-email');
-    })->name('verification.notice');
-
-    Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])
-        ->middleware(['signed'])
-        ->name('verification.verify');
-
-    Route::post('/email/resend', [AuthController::class, 'resendVerificationEmail'])
-        ->middleware('throttle:6,1')
-        ->name('verification.resend');
-});
-// ーーーーーーーーーーーーーーー
 
 

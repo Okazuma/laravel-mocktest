@@ -17,55 +17,30 @@ use Illuminate\Auth\Events\Registered;
 class AuthController extends Controller
 {
 
-    public function login(LoginRequest $request)
-    {
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            // 認証成功時の処理
-            return redirect()->intended('/');
-        }
-        return redirect()->back()->withErrors(['email' => 'ログイン情報が正しくありません。']);
-    }
-
-
-    public function logout(Request $request)
-    {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        session()->flush();
-        return redirect('/login');
-    }
 // 登録フォームの表示
+
     public function showRegisterForm()
     {
         return view('auth.register');
     }
 
+// ーーーーーーーーーー
+
+
+
 // ログインフォームの表示
+
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
+// ーーーーーーーーーー
+
+
 
 // 会員登録処理
-    // public function register(Request $request)
-    // {
-    //     $user = User::create([
-    //         'name' => $request->name,
-    //         'email' => $request->email,
-    //         'password' => Hash::make($request->password)
-    //     ]);
 
-    //     event(new Registered($user));
-
-    //     Auth::login($user);
-
-    //     return redirect()->route('register.success');
-
-    // }
     public function register(RegisterRequest $request)
     {
         $user = User::create([
@@ -75,13 +50,55 @@ class AuthController extends Controller
         ]);
 
         event(new Registered($user));
-
         Auth::login($user);
 
         return redirect()->route('email.verify');
-
     }
 
+// ーーーーーーーーーー
+
+
+
+// ログイン処理
+
+    public function login(LoginRequest $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            // 認証成功時の処理
+            if (!Auth::user()->hasVerifiedEmail()) {
+                // 認証が完了していない場合、再度認証メールを送信
+                Auth::user()->sendEmailVerificationNotification();
+                return redirect()->route('email.verify')->with('resent', true);
+            }
+
+            return redirect()->intended('/');
+        }
+
+        return redirect()->back()->withErrors(['email' => 'ログイン情報が正しくありません。']);
+    }
+
+// ーーーーーーーーーー
+
+
+
+// ログアウト処理
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        session()->flush();
+        return redirect('/login');
+    }
+
+// ーーーーーーーーーー
+
+
+
+// 　メール認証
 
     public function verifyEmail(EmailVerificationRequest $request)
     {
@@ -100,6 +117,11 @@ class AuthController extends Controller
         return redirect('/')->with('status', 'Your email has been verified.');
     }
 
+// ーーーーーーーーーー
+
+
+
+// 認証メールの再送信
 
     public function resendVerificationEmail(Request $request)
     {
@@ -108,5 +130,6 @@ class AuthController extends Controller
         return redirect('/email/verify')->with('resent', true);
     }
 
+// ーーーーーーーーーー
 
 }
