@@ -1,7 +1,11 @@
-アプリケーション名:勤怠打刻管理アプリ
+#アプリケーション名
 =====
 
-概要説明
+勤怠打刻管理アプリ
+
+
+
+##概要説明
 =====
     1.出退勤時刻、実働時間、休憩時間などを正確に記録できる。
 
@@ -9,7 +13,7 @@
 
 
 
-作成目的
+##作成目的
 =====
     1.管理者が毎回記録する手間を省き、個々で勤怠時間を打刻して記録できるようにして業務を効率化するため。
 
@@ -18,18 +22,20 @@
     3.週次や日次業務を確認する際に直近の勤怠記録をスムーズに確認できるように。
 
 
-アプリケーションURL
+
+##アプリケーションURL
 =====
 
 http://43.207.53.156
 
 
-他のリポジトリ
+
+##他のリポジトリ
 =====
 
 
 
-機能一覧
+##機能一覧
 =====
     1.会員登録、ログイン機能
 
@@ -41,7 +47,7 @@ http://43.207.53.156
 
 
 
-使用技術
+##使用技術
 =====
     Laravel 8.83
 
@@ -53,19 +59,21 @@ http://43.207.53.156
 
 
 
-テーブル設計
+##テーブル設計
 =====
 
-<img width="631" src="https://github.com/Okazuma/laravel-mocktest/assets/160417297/32cbfad3-0b5a-4085-b389-732e20afb991">
+<img width="633" src="https://github.com/Okazuma/laravel-mocktest/assets/160417297/5253e412-73d0-48e2-8be1-2052239a3ac8">
 
-ER図
+
+
+##ER図
 =====
 
 ![alt text](mocktest-ER.png)
 
 
 
-dockerビルド
+##dockerビルド
 =====
     1 git clone リンク  https://github.com/Okazuma/laravel_test.git
 
@@ -77,7 +85,7 @@ dockerビルド
 
 
 
-Laravel環境構築
+##Laravel環境構築
 =====
     1 phpコンテナにログイン       $docker-compose exec php bash
 
@@ -92,5 +100,6 @@ Laravel環境構築
     6 シーディング               $php artisan db:seed
 
 
-その他
+
+##その他
 =====
