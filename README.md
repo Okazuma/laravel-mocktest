@@ -26,10 +26,10 @@
 アプリケーションURL
 =====
 
-http://43.207.53.156
+    http://43.207.53.156
 
-メール認証機能を設定しているのでホーム画面へアクセスするために初回アクセス時は<br>
-会員登録->メール認証->ログインの順でご確認ください。
+    メール認証機能を設定しているのでホーム画面へアクセスするために初回アクセス時は<br>
+    会員登録->メール認証->ログインの順でご確認ください。
 
 
 
@@ -64,14 +64,14 @@ http://43.207.53.156
 テーブル設計
 =====
 
-<img width="633" src="https://github.com/Okazuma/laravel-mocktest/assets/160417297/5253e412-73d0-48e2-8be1-2052239a3ac8">
+    <img width="633" src="https://github.com/Okazuma/laravel-mocktest/assets/160417297/5253e412-73d0-48e2-8be1-2052239a3ac8">
 
 
 
 ER図
 =====
 
-![alt text](mocktest-ER.png)
+    ![alt text](mocktest-ER.png)
 
 
 
