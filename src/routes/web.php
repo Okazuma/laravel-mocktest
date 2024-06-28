@@ -8,6 +8,7 @@ use App\Http\Controllers\EmployeeController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\URL;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
