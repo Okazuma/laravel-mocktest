@@ -73,7 +73,9 @@
 ER図
 =====
 
-![alt text](mocktest-ER.png)
+
+<img width="650" src="https://github.com/Okazuma/laravel-mocktest/assets/160417297/faceeab7-4bf2-43c3-aeff-3068a5a04f1f">
+<!-- ![alt text](mocktest-ER.png) -->
 
 
 
