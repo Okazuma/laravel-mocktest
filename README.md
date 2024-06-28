@@ -1,7 +1,7 @@
 アプリケーション名
 =====
 
-勤怠打刻管理アプリ
+    勤怠打刻管理アプリ
 
 
 
@@ -87,12 +87,11 @@ dockerビルド
 
 Laravelの環境構築
 =====
-    1 phpコンテナにログイン       $docker-compose exec php bash
+    1 phpコンテナにログイン        $docker-compose exec php bash
 
-    2 パッケージのインストール     $composer-install
+    2 パッケージのインストール      $composer-install
 
-    3 ,envファイルの作成          cp .env.example .env
-    * 環境変数を変更とメールサーバーの設定
+    3 .envファイルの作成          cp .env.example .env
 
     4 アプリケーションキーの生成    $php artisan key:generate
 
