@@ -3,6 +3,8 @@
 
     勤怠打刻管理アプリ
 
+<img width="650" src="https://github.com/Okazuma/laravel-mocktest/assets/160417297/17b27203-0fc7-491b-ad34-2a9b8924fc68">
+
 
 
 概要説明
@@ -64,14 +66,14 @@
 テーブル設計
 =====
 
-    <img width="633" src="https://github.com/Okazuma/laravel-mocktest/assets/160417297/5253e412-73d0-48e2-8be1-2052239a3ac8">
+<img width="650" src="https://github.com/Okazuma/laravel-mocktest/assets/160417297/5253e412-73d0-48e2-8be1-2052239a3ac8">
 
 
 
 ER図
 =====
 
-    ![alt text](mocktest-ER.png)
+![alt text](mocktest-ER.png)
 
 
 
