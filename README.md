@@ -56,7 +56,7 @@ http://43.207.53.156
 テーブル設計
 =====
 
-<img width="500" src="https://github.com/Okazuma/laravel-mocktest/assets/160417297/64bafd4e-b82e-4441-9ecb-9559160963a2">
+<img width="631" src="https://github.com/Okazuma/laravel-mocktest/assets/160417297/32cbfad3-0b5a-4085-b389-732e20afb991">
 
 ER図
 =====
