@@ -1,6 +1,5 @@
 アプリケーション名
 =====
-
     勤怠打刻管理アプリ
 
 <img width="650" src="https://github.com/Okazuma/laravel-mocktest/assets/160417297/17b27203-0fc7-491b-ad34-2a9b8924fc68">
@@ -31,7 +30,7 @@
     http://43.207.53.156
 
     メール認証機能を設定しているのでホーム画面へアクセスするためには
-    初回アクセス時に 会員登録->メール認証->ログイン の順でご確認ください。
+    初回アクセス時 会員登録->メール認証->ログイン の順でユーザー登録が必要です。
 
 
 
@@ -73,9 +72,7 @@
 ER図
 =====
 
-
 <img width="650" src="https://github.com/Okazuma/laravel-mocktest/assets/160417297/faceeab7-4bf2-43c3-aeff-3068a5a04f1f">
-<!-- ![alt text](mocktest-ER.png) -->
 
 
 
