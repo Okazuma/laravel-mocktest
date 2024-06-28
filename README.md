@@ -21,6 +21,7 @@
 アプリケーションURL
 =====
 
+http://43.207.53.156
 
 
 他のリポジトリ
@@ -55,7 +56,7 @@
 テーブル設計
 =====
 
-<img width="200" src="https://github.com/Okazuma/laravel-mocktest/assets/160417297/64bafd4e-b82e-4441-9ecb-9559160963a2">
+<img width="500" src="https://github.com/Okazuma/laravel-mocktest/assets/160417297/64bafd4e-b82e-4441-9ecb-9559160963a2">
 
 ER図
 =====
@@ -66,7 +67,7 @@ ER図
 
 dockerビルド
 =====
-    1 git clone リンク 　　https://github.com/Okazuma/laravel_test.git
+    1 git clone リンク  https://github.com/Okazuma/laravel_test.git
 
     2 docker-compose up -d --build
 
