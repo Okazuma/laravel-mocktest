@@ -25,14 +25,12 @@
         @endif
     </div>
 
-
     <div class="stamp__container">
         @if (Auth::check())
         <div class="stamp__heading">
             <h2 class="stamp__ttl">{{ Auth::user()->name }}さんお疲れ様です！</h2>
         </div>
         @endif
-
 
         <div class="form">
             <div class="form__group">
@@ -67,6 +65,6 @@
                 </div>
             </div>
         </div>
-    </div>
 
+    </div>
 @endsection

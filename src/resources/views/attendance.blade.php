@@ -6,9 +6,9 @@
 @endsection
 
 
-
 @section('content')
     <div class="atte__container">
+
         <div class="atte__heading">
             <div class="atte__button">
                 <button class="atte__button-prev" id="prev-date">&lt;</button>
@@ -51,19 +51,18 @@
 
             prevDateLink.addEventListener('click', function(e) {
                 e.preventDefault();
-                updateDate(-1); // 前の日
+                updateDate(-1);
             });
 
             nextDateLink.addEventListener('click', function(e) {
                 e.preventDefault();
-                updateDate(1); // 次の日
+                updateDate(1);
             });
 
             function updateDate(daysToAdd) {
                 const currentUrl = new URL(window.location.href);
                 let currentDate = currentUrl.searchParams.get('date');
                 if (!currentDate) {
-                    // URLに日付が含まれていない場合は、本日の日付を使用する
                     currentDate = new Date();
                 } else {
                     currentDate = new Date(currentDate);
@@ -80,6 +79,5 @@
             }
         });
     </script>
-
 @endsection
 

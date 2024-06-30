@@ -5,9 +5,9 @@
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 @endsection
 
-
 @section('content')
     <div class="detail__container">
+
         <div class="detail__heading">
             <h2 class="detail__ttl">{{ $user->name }}の勤怠記録</h2>
         </div>
@@ -35,6 +35,6 @@
         <div class="footer__paginate">
             {{ $attendances->links('vendor.pagination.bootstrap-4') }}
         </div>
-    </div>
 
+    </div>
 @endsection

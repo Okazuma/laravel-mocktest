@@ -5,9 +5,9 @@
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 @endsection
 
-
 @section('content')
     <div class="employee__container">
+
         <div class="employee__heading">
             <h2 class="employee__ttl">勤務者一覧</h2>
         </div>
@@ -33,6 +33,6 @@
         <div class="footer__paginate">
             {{ $users->links('vendor.pagination.bootstrap-4') }}
         </div>
-    </div>
 
+    </div>
 @endsection

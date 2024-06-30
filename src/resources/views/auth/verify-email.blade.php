@@ -6,6 +6,7 @@
 
 @section('content')
     <div class="verify__container">
+
         <div class="verify__heading">
             <h2 class="verify__ttl">会員登録完了</h2>
         </div>
@@ -33,6 +34,6 @@
                 <a class="back__button-register" href="{{route('register')}}">新規登録</a>
             </div>
         </div>
-    </div>
 
+    </div>
 @endsection

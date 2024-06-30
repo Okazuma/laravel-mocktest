@@ -19,7 +19,6 @@
 
 <body>
 
-
     <header>
         <div class="header">
             <div class="header__inner">
@@ -54,7 +53,6 @@
             </div>
         </div>
     </header>
-
 
     <main>
         @yield('content')

@@ -1,4 +1,3 @@
-/* 通常のビュー */
 .pagination .page-item .page-link {
     border: 1px solid #ddd;
     padding: 5px 10px;
@@ -11,7 +10,6 @@
     align-items: center;
     list-style: none;
 }
-
 
 .pagination .page-item.active .page-link {
     background-color: #007bff;
