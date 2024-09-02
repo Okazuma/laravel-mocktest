@@ -72,7 +72,7 @@ class StampController extends Controller
                         ->first();
 
             if ($breakTime) {
-                return redirect('/')->with('warning_message', '休憩を終了してから勤務を終了してください');
+                return redirect('/')->さswith('warning_message', '休憩を終了してから勤務を終了してください');
             }
 
             // 勤務終了時刻を更新

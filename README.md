@@ -1,7 +1,6 @@
 アプリケーション名
 =====
     勤怠打刻管理アプリ
-
 <img width="650" src="https://github.com/Okazuma/laravel-mocktest/assets/160417297/5ea8caac-1c62-4fda-8e75-6baf1c96baf5">
 
 
@@ -28,7 +27,6 @@
 
 アプリケーションURL
 =====
-
     http://43.207.53.156
 
     メール認証機能を設定しているのでホーム画面へアクセスするためには
@@ -67,11 +65,9 @@
 <img width="650" src="https://github.com/Okazuma/laravel-mocktest/assets/160417297/5253e412-73d0-48e2-8be1-2052239a3ac8">
 
 
-
 ER図
 =====
 <img width="650" src="https://github.com/Okazuma/laravel-mocktest/assets/160417297/faceeab7-4bf2-43c3-aeff-3068a5a04f1f">
-
 
 
 dockerビルド
